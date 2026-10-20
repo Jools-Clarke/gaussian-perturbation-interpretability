@@ -1,0 +1,199 @@
+# TauREx-III settings of this retrieval. The machine paths ([Global] xsec_path, cia_path, from _CONFIG.py) and the
+# per-run paths ([Observation] observed_spectrum, [Optimizer] multi_nest_path) are added by src.retrieval.write_par.
+
+
+###############################
+# STAR
+###############################
+
+[Star]
+star_type = blackbody
+temperature = 5079 #K                          # Gressier et al. 2025, Sec 4.1.1: "Stellar parameters are fixed (radius: 0.87 R_sun, Tstar: 5079 K)"
+radius = 0.87 #R_sun                           # Gressier et al. 2025, Sec 4.1.1
+#mass =                                         # NOTE: stellar mass not given in the paper's TauREx setup description
+
+
+###############################
+# PLANET
+###############################
+
+[Planet]
+planet_type = Simple
+planet_radius = 0.54 #R_jup                             # NOTE: no fixed starting value given in the paper; RP is a free parameter, fitted between 0.3-0.9 R_jup (see [Fitting])
+planet_mass = 0.0585 #M_jup                          # 18.6 M_Earth, Gressier et al. 2025 abstract
+
+###############################
+# PRESSURE GRID
+###############################
+
+[Pressure]
+profile_type = Simple
+nlayers = 100                                  # Gressier et al. 2025, Sec 4.1.1: "atmosphere is simulated with 100 atmospheric layers"
+atm_min_pressure = 1e-3 #pa                    # Gressier et al. 2025, Sec 4.1.1: pressure grid spans 1e-3 to 1e7 Pa (1e-8 to 100 bar)
+atm_max_pressure = 1e+7 #pa                    # Gressier et al. 2025, Sec 4.1.1
+
+
+###############################
+# TEMPERATURE PROFILE
+###############################
+
+[Temperature]
+profile_type = Isothermal                      # Gressier et al. 2025, Sec 4.1.1: "temperature-pressure profile is isothermal"
+
+T = 701                                            # NOTE: no fixed starting value given; T is a free parameter, fitted between 500-1500 K (see [Fitting])
+
+
+###############################
+# CHEMISTRY
+###############################
+
+[Chemistry]
+chemistry_type = taurex
+
+fill_gases = H2,He                             # Gressier et al. 2025, Sec 4.1.1
+ratio = 0.17                                   # Gressier et al. 2025, Sec 4.1.1: "H2 and He fill the remainder of the atmosphere and are set to a ratio of 0.17"
+
+    [[H2O]]                                    # line list: Polyansky et al. 2018
+    gas_type = constant
+    mix_ratio = 2.8183e-2  #10**-1.55                             # NOTE: no fixed starting value given; log(VMR) fitted with LogUniform(-12, -0.3)
+
+    [[CO]]                                     # line list: Li et al. 2015
+    gas_type = constant
+    mix_ratio =  5.8884e-3 #10**-2.23                              # NOTE: see above
+
+    [[CO2]]                                    # line list: Rothman et al. 2010
+    gas_type = constant
+    mix_ratio =  8.3176e-4 #10**-3.08                              # NOTE: see above
+
+    [[CH4]]                                    # line list: Yurchenko et al. 2017
+    gas_type = constant
+    mix_ratio = 2.5703e-5 #10**-4.59                             # NOTE: see above
+
+    [[SO2]]                                    # line list: Underwood et al. 2016
+    gas_type = constant
+    mix_ratio = 3.5481e-5 #10**-4.45                              # NOTE: see above
+
+    [[NH3]]                                    # line list: Yurchenko et al. 2011
+    gas_type = constant
+    mix_ratio =  8.9125e-5 #10**-4.05                             # NOTE: see above
+
+    [[C2H2]]                                   # line list: Chubb et al. 2020
+    gas_type = constant
+    mix_ratio = 4.2658e-6 #10**-5.37                              # NOTE: see above
+
+    [[C2H4]]                                   # line list: Mant et al. 2018
+    gas_type = constant
+    mix_ratio = 7.7625e-6 #10**-5.11                              # NOTE: see above
+
+    [[H2S]]                                    # line list: Azzam et al. 2016
+    gas_type = constant
+    mix_ratio = 3.7153e-5 #10**-4.43                              # NOTE: see above
+
+    [[HCN]]                                    # line list: Barber et al. 2014
+    gas_type = constant
+    mix_ratio =  3.1623e-5 #10**-4.5                             # NOTE: see above
+
+
+
+# Continuum/line-list source databases (Gressier et al. 2025, Sec 4.1.1):
+#   ExoMol: Tennyson et al. 2016; Chubb et al. 2021; Tennyson et al. 2024
+#   HITEMP: Tennyson & Yurchenko 2018; Rothman et al. 2010
+#   HITRAN 2020: Gordon et al. 2022
+
+
+###############################
+# FORWARD MODEL
+###############################
+
+[Model]
+model_type = Transmission
+
+    [[Absorption]]
+
+    # Cloud coverage modeled as grey clouds; top pressure fitted (see [Fitting])
+    [[SimpleClouds]]
+    clouds_pressure = 354.8 #10**2.55                       # NOTE: no fixed starting value given; log(P_clouds) fitted with LogUniform(-3, 7) [Pa], per grey-cloud top-pressure range 1e-3-1e7 Pa (Sec 4.1.1)
+
+    # collision-induced absorption
+    [[CIA]]
+    cia_pairs = H2-H2,H2-He                    # Gressier et al. 2025, Sec 4.1.1
+
+    [[Rayleigh]]                               # Gressier et al. 2025, Sec 4.1.1: "Rayleigh scattering ... are also included"
+
+
+###############################
+# OBSERVATION
+###############################
+
+[Observation]
+# observed_spectrum: the spectrum of each run, added by src.retrieval.write_par
+
+
+###############################
+# BINNING
+###############################
+
+[Binning]
+binner = native                                # spectrum is pre-binned to R~100 prior to fitting (Sec 4.1.1)
+
+
+###############################
+# OPTIMIZER
+###############################
+
+[Optimizer]
+optimizer = multinest
+# multi_nest_path: a temporary directory per run, added by src.retrieval.write_par
+
+num_live_points = 1500                           # Gressier et al. 2025, Sec 4.1.1
+# sampling_efficiency =                          # NOTE: not specified in the paper
+evidence_tolerance = 0.5                       # Gressier et al. 2025, Sec 4.1.1
+# max_iterations =
+
+
+###############################
+# FITTING
+###############################
+
+[Fitting]
+
+# molecules fit in log mode; all abundances fitted with the same log-uniform prior (Sec 4.1.1)
+H2O:fit = True
+H2O:prior = "LogUniform(bounds=(-12, -0.3))"
+
+CO:fit = True
+CO:prior = "LogUniform(bounds=(-12, -0.3))"
+
+CO2:fit = True
+CO2:prior = "LogUniform(bounds=(-12, -0.3))"
+
+CH4:fit = True
+CH4:prior = "LogUniform(bounds=(-12, -0.3))"
+
+NH3:fit = True
+NH3:prior = "LogUniform(bounds=(-12, -0.3))"
+
+H2S:fit = True
+H2S:prior = "LogUniform(bounds=(-12, -0.3))"
+
+HCN:fit = True
+HCN:prior = "LogUniform(bounds=(-12, -0.3))"
+
+C2H2:fit = True
+C2H2:prior = "LogUniform(bounds=(-12, -0.3))"
+
+C2H4:fit = True
+C2H4:prior = "LogUniform(bounds=(-12, -0.3))"
+
+SO2:fit = True
+SO2:prior = "LogUniform(bounds=(-12, -0.3))"
+
+T:fit = True
+T:prior = "Uniform(bounds=(500, 1500))"        #K
+
+planet_radius:fit = True
+planet_radius:prior = "Uniform(bounds=(0.3, 0.9))"   #R_jup
+
+# cloud top pressure fit in log mode
+clouds_pressure:fit = True
+clouds_pressure:prior = "LogUniform(bounds=(-3, 7))"  #pa

@@ -1,0 +1,159 @@
+# TauREx-III settings of this retrieval. The machine paths ([Global] xsec_path, cia_path, from _CONFIG.py) and the
+# per-run paths ([Observation] observed_spectrum, [Optimizer] multi_nest_path) are added by src.retrieval.write_par.
+
+
+###############################
+# STAR
+###############################
+
+[Star]
+star_type = blackbody
+temperature = 6091 #K                         #stassun et at 2017
+radius = 1.19 #R_sun                          # QA
+mass = 1.23 #M_sun                            #stassun et at 2017
+
+
+###############################
+# PLANET
+###############################
+
+[Planet]
+planet_type = Simple
+planet_radius = 1.39 #R_jup                   # no prior, given as 1.2 to 1.5 R_jup
+planet_mass = 0.73 #M_jup                     # QA
+
+
+###############################
+# PRESSURE GRID
+###############################
+
+[Pressure]
+profile_type = Simple
+nlayers = 100                                 # QA
+atm_min_pressure = 1e-5 #pa                 # QA at 1e-10 bar
+atm_max_pressure = 1e+6 #pa                    # QA at 10 bar
+
+
+###############################
+# TEMPERATURE PROFILE
+###############################
+
+[Temperature]
+profile_type = Isothermal                     # QA
+
+T = 902.4                           # no prior, given as 400 to 2000 K
+
+
+###############################
+# CHEMISTRY
+###############################
+
+[Chemistry]
+chemistry_type = taurex
+
+fill_gases = H2,He                           # QA
+ratio = 0.17                                 # QA
+
+    [[H2O]]                                  # QA
+    gas_type = constant
+    mix_ratio = 3e-4                        # no prior, given as -12 to -1 
+
+    [[CH4]]                                  # QA
+    gas_type = constant
+    mix_ratio = 1e-8                       # no prior, given as -12 to -1 
+
+    [[CO]]                                   # QA
+    gas_type = constant
+    mix_ratio = 3e-8                         # no prior, given as -12 to -1 
+
+    [[CO2]]                                  # QA
+    gas_type = constant
+    mix_ratio =  1e-8                      # no prior, given as -12 to -1 
+
+    [[NH3]]                                  # QA
+    gas_type = constant
+    mix_ratio = 3e-9                        # no prior, given as -12 to -1 
+
+
+###############################
+# FORWARD MODEL
+###############################
+
+[Model]
+model_type = Transmission
+
+    [[Absorption]]
+
+    # We also retrieve the cloud-top pressure of a fully opaque cloud deck
+    [[SimpleClouds]]
+    clouds_pressure = 1e+0                                 # no prior, given as 1e+1 bar to 1e-8 bar
+
+    # we limit the collision-induced absorption to the couples H2H2 and H2-He 
+    [[CIA]]
+    cia_pairs = H2-H2,H2-He
+
+    [[Rayleigh]]                                      # QA
+
+
+###############################
+# OBSERVATION
+###############################
+
+[Observation]
+# observed_spectrum: the spectrum of each run, added by src.retrieval.write_par
+
+###############################
+# BINNING
+###############################
+
+[Binning]
+binner = native
+#bin_type = native
+
+
+###############################
+# OPTIMIZER
+###############################
+
+[Optimizer]
+optimizer = multinest
+# multi_nest_path: a temporary directory per run, added by src.retrieval.write_par
+
+num_live_points = 1500                                  # QA
+sampling_efficiency = 0.8
+evidence_tolerance = 0.5                              # QA
+# max_iterations = 10_000
+
+
+###############################
+# FITTING
+###############################
+
+[Fitting]
+
+# molecules fit in log mode
+H2O:fit = True                                         # QA
+H2O:prior = "LogUniform(bounds=(-12, -1))"
+
+CH4:fit = True                                         # QA
+CH4:prior = "LogUniform(bounds=(-12, -1))"
+
+CO:fit = True                                          # QA
+CO:prior = "LogUniform(bounds=(-12, -1))"
+
+CO2:fit = True                                         # QA
+CO2:prior = "LogUniform(bounds=(-12, -1))"
+
+NH3:fit = True                                         # QA
+NH3:prior = "LogUniform(bounds=(-12, -1))"
+
+T:fit = True                                # QA
+T:prior = "Uniform(bounds=(400, 2000))"        #K
+
+planet_radius:fit = True                               # QA
+planet_radius:prior = "Uniform(bounds=(1.2, 1.5))" 
+
+# cloud pressure fit in log mode
+clouds_pressure:fit = True                              # QA
+clouds_pressure:prior = "LogUniform(bounds=(6, 0))" #pa              #QA at 1 bar -8 bar
+

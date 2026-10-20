@@ -1,0 +1,17 @@
+# Everything this repository runs, without MPI: TauREx-III retrievals run as one process (N_MPI_PROCESSES = 1 in
+# _CONFIG.py). For parallel retrievals see README, "Setup".
+#
+#   conda env create -f environment.yml
+#   conda activate perturb
+#
+# Conda supplies only Python and the compiled MultiNest library (pip cannot build it); every Python package comes
+# from pip, via requirements.txt.
+name: perturb
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - multinest=3.10
+  - pip
+  - pip:
+      - -r requirements.txt
