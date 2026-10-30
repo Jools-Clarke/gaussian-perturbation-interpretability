@@ -1,9 +1,9 @@
 """Experiment 3, step 5: the numbers the CNN figures plot (Secs 7.3.3 and 8.2).
 
     global_metric.csv               Fig 13 middle: global metric (Eq. 14) over the training split, which the
-                                    network learned from (almost the same as Fig G1's for SO2 and CO2)
-    response_gradient_<mode>.csv    Figs 13, K1: slope of the response between neighbouring magnitudes
-    importance.csv                  Fig K1 (d, h): the mean of those slopes (Eq. 13), for each mode of step 4
+                                    network learned from (almost the same as Fig H1's for SO2 and CO2)
+    response_gradient_<mode>.csv    Figs 13, L1: slope of the response between neighbouring magnitudes
+    importance.csv                  Fig L1 (d, h): the mean of those slopes (Eq. 13), for each mode of step 4
     co2_core_correlation.csv        Fig 10: correlation between the raw depth in the 4.293 um bin and log CO2 within
                                     sliding 1-dex windows of log CO2, across every training-set model
 """
@@ -33,7 +33,7 @@ if __name__ == "__main__":
     out["global_metric"] = pd.DataFrame({"wl_um": wl, **{f"global_{m}": metric(train[bins].values, train[f"log_{m}"].values)
                                                          for m in config.MOLECULES}})
 
-    # Figs 13, K1
+    # Figs 13, L1
     out["importance"] = []
     for mode in MODES:
         response = pd.read_csv(OUT / f"response_{mode}.csv").pivot(index=["gas", "centre_um"], columns="xi",

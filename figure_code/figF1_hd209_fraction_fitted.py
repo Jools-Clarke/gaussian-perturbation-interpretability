@@ -1,4 +1,4 @@
-"""Fig E1: how much of each HD 209458 b perturbation TauREx's best fit reproduces (Sec. 7.2.5). (a, b) the change in
+"""Fig F1: how much of each HD 209458 b perturbation TauREx's best fit reproduces (Sec. 7.2.5). (a, b) the change in
 the spectrum and in the best fit for the 1.46 um, +2 sigma naive and Gaussian runs; (c) the fraction fitted (Eq. 16)
 per perturbed bin, median and interquartile range over the six magnitudes.
 
@@ -58,7 +58,7 @@ def main():
         med, lo, hi = np.median(frac, axis=1), np.percentile(frac, 25, axis=1), np.percentile(frac, 75, axis=1)
         ax_f.vlines(centres + offset, lo, hi, color=COLOURS[name], lw=0.8)
         ax_f.plot(centres + offset, med, marker, ms=3.5, mec=COLOURS[name], mfc=face, ls="none")
-        summary[name] = np.median(frac)
+        summary[name] = np.mean(frac), np.median(frac)
     ax_f.axvline(key[0], color="0.75", lw=0.6, ls="--", zorder=0)
     ax_f.set_ylabel(FRACTION)
     ax_f.legend(handles=[Line2D([], [], marker="o", ls="none", ms=3.5, mec=COLOURS["naive"], mfc="white", label="naive"),
@@ -69,8 +69,9 @@ def main():
         ax.tick_params(labelbottom=False)
     wavelength_axis(ax_f, centres)
     fig.align_ylabels([ax_n, ax_g, ax_f])
-    print(f"example {key}: naive {f_n:.2f}, Gaussian {f_g:.2f}; median over all runs: naive {summary['naive']:.2f}, "
-          f"Gaussian {summary['gaussian']:.2f}; saved", style.save(fig, Path(__file__).stem, dpi=300))
+    print(f"example {key}: naive {f_n:.2f}, Gaussian {f_g:.2f}; mean (median) over all runs: "
+          f"naive {summary['naive'][0]:.2f} ({summary['naive'][1]:.2f}), "
+          f"Gaussian {summary['gaussian'][0]:.2f} ({summary['gaussian'][1]:.2f}); saved", style.save(fig, Path(__file__).stem, dpi=300))
     plt.close(fig)
 
 

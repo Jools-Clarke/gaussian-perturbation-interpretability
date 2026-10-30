@@ -17,7 +17,7 @@ from matplotlib.colors import to_rgb
 
 import _CONFIG as config
 from E3_CNN.step3_posterior import RESOLUTION
-from figJ1_cnn_corner import ACCENT, LABELS, TEXTWIDTH_IN, contour_style, plot_ranges
+from figK1_cnn_corner import ACCENT, LABELS, TEXTWIDTH_IN, contour_style, plot_ranges
 from src import plotting as style
 
 ROOT = Path(__file__).resolve().parents[1]

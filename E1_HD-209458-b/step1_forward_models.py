@@ -1,9 +1,9 @@
 """Experiment 1, step 1: the HD 209458 b forward models that need no retrieval (Sec. 7.2).
 
 1. Prior grid for the global metric (Eq. 14) and Figs 2, C1: the five gases on a regular grid, log VMR -10 to -2 in
-   steps of 2 dex (3 125 models); T, Rp and the cloud top fixed at the .par starting values (902.4 K, 1.39 RJ, 1 Pa).
+   steps of 2 dex (3 125 models); T, Rp and the cloud top fixed at the .par starting values (902.4 K, 1.39 RJ, 10^3 Pa).
        -> outputs/grid_spectra.csv     one row per model: log_<gas> x5, then one column per bin (um)
-2. Contributions (Sec. 7.2.1, Fig 5 lower panels): one native-resolution model per gas.
+2. Contributions (Sec. 7.2.1, Figs 7, D1 lower panels): one native-resolution model per gas.
        -> outputs/contributions.csv    wl_um, then one column per gas
 """
 import itertools

@@ -1,7 +1,7 @@
 """Experiment 2, step 2: every HAT-P-26 b TauREx-III retrieval (Sec. 7.3), one after another (~6.5 h each).
 
 Observation: Gressier et al. (2025), NIRSpec G395H, transitspectroscopy reduction at R ~ 100, 60 bins (Sec. 4.2).
-Settings: the .par next to it (Tables F1, F2).
+Settings: the .par next to it (Tables G1, G2).
 Runs (9):
     baseline                           x*, xi = 0 for every centre
     gaussian, 2 centres x 2 xi         the bins nearest the SO2 (4.04 um) and CO2 (4.29 um) bands, xi = +-3 sigma

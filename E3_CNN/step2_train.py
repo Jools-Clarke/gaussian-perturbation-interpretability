@@ -1,9 +1,9 @@
-"""Experiment 3, step 2: train the CNN (src.cnn, Table I1) on outputs/training_set.csv.
+"""Experiment 3, step 2: train the CNN (src.cnn, Table J1) on outputs/training_set.csv.
 
 Adam (lr 1e-3), batch 128, MSE on the normalised targets. Noise of sigma_m is added to every training spectrum and
 redrawn every epoch: perturbations of order sigma_m only stay in distribution for a network trained on noisy spectra
-(Appendix I2). Validation on 5 fixed noisy copies; the learning rate is halved after 10 epochs without improvement,
-training stops after 30, and the best validation weights are kept (epoch 246 of 276 in the paper).
+(Appendix J2). Validation on 5 fixed noisy copies; the learning rate is halved on the 11th epoch
+without improvement (PyTorch's patience=10), training stops after 30 with no epoch cap, and the best validation weights are kept (epoch 246 of 276 in the paper).
     -> outputs/normalisation.csv      0.5th and 99.5th training percentiles, one column per bin and per gas
     -> outputs/cnn_weights.pt         the trained weights
     -> outputs/training_history.csv   epoch, train loss, val loss, learning rate
@@ -11,6 +11,7 @@ training stops after 30, and the best validation weights are kept (epoch 246 of 
 About 15 min on an M4 Pro GPU (mps). The device is picked automatically, so another machine trains a slightly
 different network.
 """
+import itertools
 from pathlib import Path
 
 import numpy as np
@@ -24,11 +25,10 @@ from src.forward_model import wl_columns
 
 OUT = Path(__file__).resolve().parent / "outputs"
 NORM_PERCENTILES = (0.5, 99.5)
-EPOCHS = 300
 BATCH_SIZE = 128
 LR = 1e-3
 PATIENCE = 30  # early stopping: epochs without a better validation loss
-LR_PATIENCE = 10  # LR halved after this many
+LR_PATIENCE = 10  # LR halved on the epoch after this many without improvement
 VAL_COPIES = 5  # fixed noisy copies of each validation spectrum, 1 sigma
 SEED = 0  # torch: weights, shuffle, training noise
 DEVICE = "mps" if torch.backends.mps.is_available() else "cpu"
@@ -79,7 +79,7 @@ if __name__ == "__main__":
           f"on {DEVICE}")
 
     history, best_val, best_epoch = [], np.inf, 0
-    for epoch in range(1, EPOCHS + 1):
+    for epoch in itertools.count(1):  # no epoch cap (Table J1): early stopping ends training
         train_loss = run_epoch(model, train_loader, optimiser)
         val_loss = F.mse_loss(torch.as_tensor(predict(model, val_x, device=DEVICE)), val_y).item()
         if val_loss < best_val:

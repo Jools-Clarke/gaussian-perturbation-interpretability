@@ -1,4 +1,4 @@
-"""Fig D1: Fig 7 for each of the five HD 209458 b gases.
+"""Fig E1: Fig 6 for each of the five HD 209458 b gases.
 
 Reads: E1_HD-209458-b/outputs/importance.csv, metrics.csv, posterior_summary.csv
 """
@@ -8,7 +8,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-from fig07_hd209_h2o_importance import MOLS, XLABEL, YLABEL, data, panel
+from fig06_hd209_h2o_importance import MOLS, XLABEL, YLABEL, data, panel
 from src import plotting as style
 
 
@@ -21,7 +21,7 @@ def main(imp, rho, retrieved):
     axes = axes.flatten()
     for ax, m in zip(axes, MOLS):
         r = panel(ax, m, imp[m], rho[m], retrieved[m], colour=colours[m], marker=markers[m], fit_colour="k")
-        print(f"D1: {m:4s} r = {r:.2f}")
+        print(f"E1: {m:4s} r = {r:.2f}")
     for ax in axes[len(MOLS):]:
         ax.axis("off")
     axes[len(MOLS) - ncols].tick_params(labelbottom=True)  # the panel above the blank one carries its column's ticks

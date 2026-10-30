@@ -1,4 +1,4 @@
-"""Fig 5 (and, via plot(), Fig G1): for each gas, the global (solid, Eq. 14) and local (dashed, Eq. 15) metric against
+"""Fig D1 (and, via plot(), Fig H1): for each gas, the global (solid, Eq. 14) and local (dashed, Eq. 15) metric against
 wavelength, and below it the gas's contribution (in colour) over the other gases' (grey) (Sec. 7.2).
 
 Reads: E1_HD-209458-b/outputs/metrics.csv, contributions.csv

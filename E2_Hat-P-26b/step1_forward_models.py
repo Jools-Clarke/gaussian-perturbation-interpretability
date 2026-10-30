@@ -1,10 +1,10 @@
-"""Experiment 2, step 1: the HAT-P-26 b forward models that need no retrieval (Sec. 7.3, Fig G1).
+"""Experiment 2, step 1: the HAT-P-26 b forward models that need no retrieval (Sec. 7.3, Fig H1).
 
 1. Prior grid for the global metric (Eq. 14) and Fig 3's classifier: 486 models, nine of the ten gases drawn from
    their LogUniform(-12, -0.3) priors by a seeded Latin hypercube (C2H4 stays at its .par value); T, Rp and the cloud
    top fixed at the .par starting values (701 K, 0.54 RJ, 10^2.55 Pa).
        -> outputs/grid_spectra.csv     one row per model: log_<gas> x9, then one column per bin (um)
-2. Contributions (Sec. 7.2.1, Fig G1 lower panels): one native-resolution model per gas.
+2. Contributions (Sec. 7.2.1, Fig H1 lower panels): one native-resolution model per gas.
        -> outputs/contributions.csv    wl_um, then one column per gas
 """
 from pathlib import Path

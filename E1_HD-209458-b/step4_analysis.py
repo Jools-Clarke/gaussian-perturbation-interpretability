@@ -5,13 +5,13 @@ weighted by the MultiNest weights.
     correlation_separation.csv   Fig 2: that correlation against bin separation, in 0.05 um bins (Sec. 5.1)
     gaussian_fit.csv             Fig 2: FWHM of the Gaussian fitted to it, the kernel width (0.101 um in the paper),
                                  and the binning it was fitted with
-    metrics.csv                  Figs 5, 6, 7, D1: global (Eq. 14) and local (Eq. 15) metric of each gas per bin
+    metrics.csv                  Figs 5, 6, 7, D1, E1: global (Eq. 14) and local (Eq. 15) metric of each gas per bin
     response.csv                 Fig 4: response (Eq. 12), the shift of the posterior mean of each gas from the baseline
-    response_gradient.csv        Figs 4, 6: its slope between neighbouring magnitudes (Sec. 7.1)
-    importance.csv               Figs 7, D1: the mean of those slopes (Eq. 13)
-    posterior_summary.csv        Figs 7, D1 labels, Table B3: weighted median, p16, p84 and mean of the baseline
-    fraction_fitted.csv          Fig E1 (c): fraction of each perturbation the best fit reproduces (Eq. 16)
-    fraction_fitted_example.csv  Fig E1 (a, b): the changes behind it for the 1.46 um, +2 sigma runs
+    response_gradient.csv        Figs 4, 5: its slope between neighbouring magnitudes (Sec. 7.1)
+    importance.csv               Figs 6, E1: the mean of those slopes (Eq. 13)
+    posterior_summary.csv        Figs 6, E1 labels, Table B3: weighted median, p16, p84 and mean of the baseline
+    fraction_fitted.csv          Fig F1 (c): fraction of each perturbation the best fit reproduces (Eq. 16)
+    fraction_fitted_example.csv  Fig F1 (a, b): the changes behind it for the 1.46 um, +2 sigma runs
 """
 from pathlib import Path
 
@@ -29,7 +29,7 @@ OUT = Path(__file__).resolve().parent / "outputs"
 GASES = ["H2O", "CH4", "CO", "CO2", "NH3"]
 BIN_WIDTH = 0.05  # um, Fig 2 separation bins, centred on zero (caption)
 MIN_BIN_COUNT = 5  # bins with this many pairs or fewer are left out of the fit (Fig 2)
-EXAMPLE_UM, EXAMPLE_XI = 1.457, 2.0  # Fig E1 (a, b)
+EXAMPLE_UM, EXAMPLE_XI = 1.457, 2.0  # Fig F1 (a, b)
 
 
 # ---------------------------------------------------------------- data access
@@ -145,14 +145,14 @@ if __name__ == "__main__":
     print(f"Fig 2: FWHM = {popt[0]:.4f} +/- {np.sqrt(pcov[0, 0]):.4f} um; z = {z:.2f} from 0.1 um, "
           f"two-sided p = {2 * (1 - stats.norm.cdf(abs(z))):.3f}")
 
-    # Figs 5, 6, 7, D1: global metric over the prior grid (Eq. 14), local metric over the posterior (Eq. 15)
+    # Figs 5, 6, 7, D1, E1: global metric over the prior grid (Eq. 14), local metric over the posterior (Eq. 15)
     glob = [metric(grid[cols].values, grid[f"log_{g}"].values, normalise=True) for g in GASES]
     loc, wl = posterior_metric(GASES)
     assert np.allclose(wl, np.array(cols, float))
     out["metrics"] = pd.DataFrame({"wl_um": wl, **{f"global_{g}": r for g, r in zip(GASES, glob)},
                                    **{f"local_{g}": r for g, r in zip(GASES, loc)}})
 
-    # Figs 4, 6, 7, D1, E1: response, its gradient and the importance (Eqs. 12, 13), and the fraction fitted (Eq. 16)
+    # Figs 4, 5, 6, E1, F1: response, its gradient and the importance (Eqs. 12, 13), and the fraction fitted (Eq. 16)
     base, base_spectra = load_baseline(), load_baseline("spectra")
     for name in ("response", "response_gradient", "importance", "fraction_fitted", "fraction_fitted_example"):
         out[name] = []
@@ -174,7 +174,7 @@ if __name__ == "__main__":
                                                 delta_spectrum_sigma=a, delta_best_fit_sigma=b)
                                            for w, a, b in zip(base_spectra["wl_um"], dx, dbf)]
 
-    # Figs 7, D1 labels, Table B3
+    # Figs 6, E1 labels, Table B3
     out["posterior_summary"] = pd.DataFrame([dict(param=p, **{s: summary(base, p, s) for s in ("median", "p16", "p84", "mean")})
                                              for p in base.columns if p != "weight"])
 

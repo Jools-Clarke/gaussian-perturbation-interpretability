@@ -102,7 +102,7 @@ def write_spectrum(path, wl, depth, error):
 
 
 def write_par(template_par, out_par, observation_dat, multinest_dir):
-    """Copy of a .par from DATA/ (the settings of Tables B1-B2, F1-F2) with the paths it leaves out added: the data
+    """Copy of a .par from DATA/ (the settings of Tables B1-B2, G1-G2) with the paths it leaves out added: the data
     paths of _CONFIG.py, the observation and the MultiNest folder. Parsed with configobj, as TauREx does."""
     from configobj import ConfigObj
 

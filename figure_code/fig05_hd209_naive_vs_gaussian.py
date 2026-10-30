@@ -1,4 +1,4 @@
-"""Fig 6: HD 209458 b, log H2O. Response gradient under naive (top) and Gaussian (bottom) perturbation, each on its own
+"""Fig 5: HD 209458 b, log H2O. Response gradient under naive (top) and Gaussian (bottom) perturbation, each on its own
 colour scale, with the local metric of H2O between them (Sec. 7.2.5).
 
 Reads: E1_HD-209458-b/outputs/response_gradient.csv, metrics.csv
@@ -21,7 +21,7 @@ E1 = Path(__file__).resolve().parents[1] / "E1_HD-209458-b" / "outputs"
 
 
 def metrics_panel(ax, centres):
-    """Local metric of H2O (posterior forward models, raw, weighted), dashed in the H2O colour as Fig 5."""
+    """Local metric of H2O (posterior forward models, raw, weighted), dashed in the H2O colour as Fig D1."""
     m = pd.read_csv(E1 / "metrics.csv")
     assert np.allclose(m["wl_um"].values, centres, atol=2e-3)
     ax.axhline(0, color="0.6", lw=0.5)

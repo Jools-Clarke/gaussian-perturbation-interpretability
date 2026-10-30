@@ -1,10 +1,10 @@
-"""Experiment 3, step 4: Gaussian perturbation of the CNN (Sec. 8.2; Figs 13, K1).
+"""Experiment 3, step 4: Gaussian perturbation of the CNN (Sec. 8.2; Figs 13, L1).
 
 Every one of the 60 bins as centre, 101 magnitudes from -3 to +3 sigma (steps of 0.06 sigma), FWHM 0.1 um (Eq. 11).
 The response (Eq. 12) of f, evaluated three ways:
-    fixed1000   the mean over the same 1 000 dropout masks for every input: f of the paper (Fig 13; K1 a, e)
-    fresh1000   the mean over 1 000 fresh masks per evaluation (K1 b, f)
-    fresh1      one fresh mask per evaluation (K1 c, g)
+    fixed1000   the mean over the same 1 000 dropout masks for every input: f of the paper (Fig 13; L1 a, e)
+    fresh1000   the mean over 1 000 fresh masks per evaluation (L1 b, f)
+    fresh1      one fresh mask per evaluation (L1 c, g)
     -> outputs/response_<mode>.csv    centre_um, xi, gas, response (change in the predicted log VMR)
 
 About 15 min on CPU, almost all of it fresh1000; fixed1000 alone takes seconds (Sec. 8.3).
