@@ -1,4 +1,4 @@
-"""Fig 7 (and the shared panel of Fig D1): HD 209458 b, the importance of each bin for H2O under Gaussian perturbation
+"""Fig 6 (and the shared panel of Fig E1): HD 209458 b, the importance of each bin for H2O under Gaussian perturbation
 against its local metric, with the linear fit and its Pearson r, and the retrieved log H2O (Sec. 7.2.4).
 
 Reads: E1_HD-209458-b/outputs/importance.csv, metrics.csv, posterior_summary.csv
@@ -17,7 +17,7 @@ from src import plotting as style
 
 E1 = Path(__file__).resolve().parents[1] / "E1_HD-209458-b" / "outputs"
 MOLS = ["H2O", "CH4", "NH3", "CO", "CO2"]
-XLABEL = r"importance (dex $\sigma^{-1}$)"  # Eq. 21; units and wording as Fig I1
+XLABEL = r"importance (dex $\sigma^{-1}$)"  # Eq. 13; units and wording as Fig L1
 YLABEL = r"$\rho_{\mathrm{post}}\left(\mathcal{D}_{m}, \log \mathbf{Y}\right)$"
 
 
@@ -56,7 +56,7 @@ def fig7(imp, rho, retrieved):
     ax.set_xlim(-0.5, 0.5); ax.set_ylim(-0.5, 0.5)
     ax.set_xticks([-0.4, -0.2, 0, 0.2, 0.4]); ax.set_yticks([-0.4, -0.2, 0, 0.2, 0.4])
     ax.set_xlabel(r"importance, $\mathrm{H_2O}$ (dex $\sigma^{-1}$)"); ax.set_ylabel(YLABEL)
-    print(f"Fig 7: H2O r = {r:.2f}; saved", style.save(fig, Path(__file__).stem))
+    print(f"Fig 6: H2O r = {r:.2f}; saved", style.save(fig, Path(__file__).stem))
     plt.close(fig)
 
 

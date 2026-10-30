@@ -81,7 +81,7 @@ def expand_columns(values, columns):
     return out
 
 
-# ---------------------------------------------------------------- response-gradient heatmaps (Sec. 7.1; Figs 4, 6, E1)
+# ---------------------------------------------------------------- response-gradient heatmaps (Sec. 7.1; Figs 4, 5)
 GRADIENT = r"$\partial\Delta\log\mathbf{H_2O}/\partial\xi$" + "\n" + r"(dex $\sigma^{-1}$)"
 
 
@@ -121,7 +121,7 @@ def wavelength_axis(ax, centres):
     ax.set_xlim(edges(centres)[0], edges(centres)[-1])
 
 
-# ---------------------------------------------------------------- weighted posterior contours (Figs 9, H1-H4)
+# ---------------------------------------------------------------- weighted posterior contours (Figs 9, I1-I4)
 SIGMA_TO_FRAC = {1: 0.6827, 2: 0.9545}
 
 

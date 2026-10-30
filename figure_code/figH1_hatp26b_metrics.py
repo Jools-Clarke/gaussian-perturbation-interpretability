@@ -1,4 +1,4 @@
-"""Fig G1: Fig 5 for HAT-P-26 b, the nine gases of the prior grid (C2H4 is not drawn in it).
+"""Fig H1: Fig D1 for HAT-P-26 b, the nine gases of the prior grid (C2H4 is not drawn in it).
 
 Reads: E2_Hat-P-26b/outputs/metrics.csv, contributions.csv
 """
@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from fig05_hd209_metrics import plot
+from figD1_hd209_metrics import plot
 
 E2 = Path(__file__).resolve().parents[1] / "E2_Hat-P-26b" / "outputs"
 

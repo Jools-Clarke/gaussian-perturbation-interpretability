@@ -1,4 +1,4 @@
-"""Experiment 3, step 3: the CNN's posterior for the simulated HAT-P-26 b observation (Sec. 8.1; Figs 12, J1).
+"""Experiment 3, step 3: the CNN's posterior for the simulated HAT-P-26 b observation (Sec. 8.1; Figs 12, K1).
 
 1. 20 000 noisy realisations x* + sigma_m N(0, 1), each passed through the network once with its own fresh dropout
    mask, so the posterior combines the network's uncertainty with the observational noise.

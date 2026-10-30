@@ -22,7 +22,7 @@ from src.plotting import hpd_thresholds, weighted_hist
 E2 = Path(__file__).resolve().parents[1] / "E2_Hat-P-26b" / "outputs"
 MAGNITUDES = np.array([-3.0, 0.0, 3.0])  # the xi grid of the HAT-P-26 b retrievals (Eq. 10)
 ROW_LABELS = {"naive": ("a.", "Naive"), "gaussian": ("b.", "Gaussian")}
-# mathtext names of the retrieval parameters (Figs 9, H1-H4)
+# mathtext names of the retrieval parameters (Figs 9, I1-I4)
 TEX = {"SO2": "SO_2", "CO2": "CO_2", "CH4": "CH_4", "NH3": "NH_3", "C2H2": "C_2H_2", "C2H4": "C_2H_4", "H2S": "H_2S",
        "HCN": "HCN", "clouds_pressure": "Cloud Pressure", "T": "T_{isothermal}", "planet_radius": "R_{planet}"}
 

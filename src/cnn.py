@@ -1,8 +1,8 @@
-"""The CNN retrieval of Sec. 8 (Appendix I, Table I1) and the black box f it gives (Secs 2.5 and 8.2). PyTorch.
+"""The CNN retrieval of Sec. 8 (Appendix J, Table J1) and the black box f it gives (Secs 2.5 and 8.2). PyTorch.
 
 f(x) is the mean prediction over a FIXED set of 1 000 Monte Carlo dropout masks, the same for every input, so the
 dropout noise cancels when two predictions are compared and a perturbation changes f only through the spectrum.
-FreshMaskBlackBox redraws the masks at every evaluation instead (Fig K1).
+FreshMaskBlackBox redraws the masks at every evaluation instead (Fig L1).
 """
 from pathlib import Path
 
@@ -14,7 +14,7 @@ from torch import nn
 import _CONFIG as config
 
 
-# ---------------------------------------------------------------- the network (Appendix I1)
+# ---------------------------------------------------------------- the network (Appendix J1)
 class RetrievalCNN(nn.Module):
     """60 normalised bins -> 10 normalised log10 VMRs: the ADC 2022 Monte Carlo dropout baseline (Yip et al. 2022)
     without its stellar and planetary radius inputs, which are fixed in this training set. Three blocks of two Conv1d
@@ -94,7 +94,7 @@ def load_checkpoint(path, device="cpu"):
     return model, checkpoint
 
 
-# ---------------------------------------------------------------- normalisation (Table I1)
+# ---------------------------------------------------------------- normalisation (Table J1)
 def normalise(values, norm, columns):
     """values (..., len(columns)) -> the linear map sending norm's two rows (the training set's 0.5th and 99.5th
     percentiles) to 0 and 1. Never clipped: perturbed spectra must pass through the same map."""
@@ -107,7 +107,7 @@ def denormalise(values, norm, columns):
     return np.asarray(values) * (hi - lo) + lo
 
 
-# ---------------------------------------------------------------- noise (Appendix I2: sigma_m per bin)
+# ---------------------------------------------------------------- noise (Appendix J2: sigma_m per bin)
 def fixed_noisy_copies(x, sigma, level, n_copies, seed):
     """n_copies noisy versions x + level sigma N(0, 1) of the spectra x (n, n_wl), stacked copy by copy:
     (n_copies * n, n_wl). sigma is in the units of x; the same seed always gives the same noise."""
@@ -118,7 +118,7 @@ def fixed_noisy_copies(x, sigma, level, n_copies, seed):
 
 class NoisyDataset(torch.utils.data.Dataset):
     """Noisy (x, y) pairs for training: x (n, n_wl) noiseless spectra plus level * sigma (n_wl,) Gaussian noise.
-    fresh=True draws new noise every time a sample is read, i.e. every epoch (Appendix I2); otherwise n_copies
+    fresh=True draws new noise every time a sample is read, i.e. every epoch (Appendix J2); otherwise n_copies
     fixed copies."""
 
     def __init__(self, x, y, sigma, n_copies=1, level=1.0, fresh=False, seed=0):
@@ -208,7 +208,7 @@ class BlackBox:
 
 
 class FreshMaskBlackBox:
-    """f as the mean of n passes, each with a FRESH dropout mask, so f is no longer deterministic (Fig K1):
+    """f as the mean of n passes, each with a FRESH dropout mask, so f is no longer deterministic (Fig L1):
     n = 1000 recovers the importance but not the response-gradient maps, n = 1 is a single noisy pass."""
 
     def __init__(self, out_dir, n, seed, chunk=2000):

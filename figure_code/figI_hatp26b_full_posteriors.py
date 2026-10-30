@@ -1,5 +1,5 @@
-"""Figs H1-H4: full corner plots of the HAT-P-26 b retrievals at xi = -3 (purple), 0 (teal) and +3 sigma (yellow):
-    H1 naive 4.041 um    H2 naive 4.293 um    H3 Gaussian 4.041 um    H4 Gaussian 4.293 um
+"""Figs I1-I4: full corner plots of the HAT-P-26 b retrievals at xi = -3 (purple), 0 (teal) and +3 sigma (yellow):
+    I1 naive 4.041 um    I2 naive 4.293 um    I3 Gaussian 4.041 um    I4 Gaussian 4.293 um
 Weighted KDE contours and marginals, as Fig 9.
 
 Reads: E2_Hat-P-26b/outputs/runs.csv, posteriors/*.csv
@@ -17,10 +17,10 @@ from fig09_hatp26b_posteriors import MAGNITUDES, finite_samples, magnitude_colou
 from src import plotting as style
 from src.plotting import hpd_thresholds, weighted_hist
 
-# the 13 retrieval parameters (Table F2)
+# the 13 retrieval parameters (Table G2)
 PARAMS = ["log_H2O", "log_CO", "log_CO2", "log_CH4", "log_SO2", "log_NH3", "log_C2H2", "log_C2H4", "log_H2S", "log_HCN",
           "log_clouds_pressure", "T", "planet_radius"]
-FIGURES = {"H1": ("naive", 4.041), "H2": ("naive", 4.293), "H3": ("gaussian", 4.041), "H4": ("gaussian", 4.293)}
+FIGURES = {"I1": ("naive", 4.041), "I2": ("naive", 4.293), "I3": ("gaussian", 4.041), "I4": ("gaussian", 4.293)}
 
 
 def corner_plot(label, kernel, wl):

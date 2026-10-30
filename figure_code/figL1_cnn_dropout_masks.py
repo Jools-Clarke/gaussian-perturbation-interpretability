@@ -1,4 +1,4 @@
-"""Fig K1: response-gradient maps of the CNN for SO2 (a-c) and CO2 (e-g) with 1 000 fixed masks, 1 000 fresh masks
+"""Fig L1: response-gradient maps of the CNN for SO2 (a-c) and CO2 (e-g) with 1 000 fixed masks, 1 000 fresh masks
 and 1 fresh mask per evaluation, and the importance in each case (d, h) (Sec. 8.2).
 
 Reads: E3_CNN/outputs/response_gradient_{fixed1000,fresh1000,fresh1}.csv, importance.csv
@@ -14,7 +14,7 @@ import pandas as pd
 import _CONFIG as config
 from src import plotting as style
 from src.plotting import bin_edges_with_gaps, expand_columns
-from figJ1_cnn_corner import LABELS
+from figK1_cnn_corner import LABELS
 
 E3 = Path(__file__).resolve().parents[1] / "E3_CNN" / "outputs"
 TEXTWIDTH_IN = 7.03  # RASTI two-column text width (508 pt)

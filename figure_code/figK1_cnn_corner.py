@@ -1,4 +1,4 @@
-"""Fig J1: the full posterior of the CNN retrieval of the simulated HAT-P-26 b spectrum (20 000 draws, Sec. 8.1):
+"""Fig K1: the full posterior of the CNN retrieval of the simulated HAT-P-26 b spectrum (20 000 draws, Sec. 8.1):
 1, 2, 3 sigma contours, median and 1 sigma above each column, input values in red. Its helpers also draw Fig 12's
 inset.
 
@@ -23,7 +23,7 @@ ACCENT = "#B03A2E"  # brick red: the input values in the corner plots, the recov
 SIGMAS = (1, 2, 3)  # contours of the corner plots
 ONE_SIGMA = 100 * norm.cdf([-1, 0, 1])  # percentiles: 1 sigma below, median, 1 sigma above
 CONTOUR_GREYS = {1: "0.52", 2: "0.72", 3: "0.88"}
-# gas labels of Figs 12, J1, K1: text with math subscripts (SO$_2$)
+# gas labels of Figs 12, K1, L1: text with math subscripts (SO$_2$)
 LABELS = {m: "".join(f"$_{c}$" if c.isdigit() else c for c in m) for m in style.TEX}
 
 

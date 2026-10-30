@@ -10,7 +10,7 @@ cite the paper's sections, equations, figures and tables.
 _CONFIG.py          machine paths (TauREx, cross-sections, CIA) and the settings shared between experiments
 download_data.sh    fetches the opacity data into DATA/XSEC and DATA/CIA
 run_all.sh          every step of every experiment, then every figure
-DATA/               the two observations and their TauREx-III .par files (Tables B1-B2, F1-F2); XSEC/ and CIA/
+DATA/               the two observations and their TauREx-III .par files (Tables B1-B2, G1-G2); XSEC/ and CIA/
                     hold the downloaded opacities
 src/                the method and the shared code (src/__init__.py lists it)
 E1_HD-209458-b/     experiment 1: HST WFC3, TauREx-III (Secs 4.1, 7)
@@ -31,12 +31,12 @@ experiment's `outputs/` folder. Figure scripts only read those CSVs and plot.
 | Sec. 6, dimension reduction | E2 step 1 (prior grid), step 3 (simulated observation), step 4 (analysis) | 3 |
 | Sec. 7, HD 209458 b retrievals: 1 + 2 x 108 | E1 step 2 (retrievals) | |
 | Sec. 7.1, response and importance | E1 step 4 (analysis) | 4 |
-| Sec. 7.2, contributions, global and local metric | E1 step 1 (prior grid), step 3 (posterior forward models), step 4 (analysis) | 5, 6, 7, D1 |
-| Sec. 7.2.5, naive vs Gaussian | E1 step 4 (analysis) | 6, E1 |
-| Sec. 7.3, HAT-P-26 b retrievals: 1 + 8 | E2 step 2 (retrievals), step 3 (posterior forward models), step 5 (analysis) | 8, 9, 10, 11, G1, H1-H4 |
-| Sec. 8 and App. I, the CNN | E3 step 1 (training set), step 2 (training) | |
-| Sec. 8.1, CNN posterior | E3 step 3 (posterior estimation)| 12, J1 |
-| Sec. 8.2, perturbing the CNN | E3 step 4 (perturbation), step 5 (analysis) | 13, K1 |
+| Sec. 7.2, contributions, global and local metric | E1 step 1 (prior grid), step 3 (posterior forward models), step 4 (analysis) | 5, 6, 7, D1, E1 |
+| Sec. 7.2.5, naive vs Gaussian | E1 step 4 (analysis) | 5, F1 |
+| Sec. 7.3, HAT-P-26 b retrievals: 1 + 8 | E2 step 2 (retrievals), step 3 (posterior forward models), step 5 (analysis) | 8, 9, 10, 11, H1, I1-I4 |
+| Sec. 8 and App. J, the CNN | E3 step 1 (training set), step 2 (training) | |
+| Sec. 8.1, CNN posterior | E3 step 3 (posterior estimation)| 12, K1 |
+| Sec. 8.2, perturbing the CNN | E3 step 4 (perturbation), step 5 (analysis) | 13, L1 |
 
 ## Setup
 
@@ -119,9 +119,9 @@ reads experiment 2's simulated observation, and Figs 10, 12 and 13 read both.
 | 2 | `fig02_correlation_vs_separation.py` | 1 |
 | 3 | `fig03_dimension_reduction.py` | 2 |
 | 4 | `fig04_hd209_h2o_response.py` | 1 |
-| 5 | `fig05_hd209_metrics.py` | 1 |
-| 6 | `fig06_hd209_naive_vs_gaussian.py` | 1 |
-| 7 | `fig07_hd209_h2o_importance.py` | 1 |
+| 5 | `fig05_hd209_naive_vs_gaussian.py` | 1 |
+| 6 | `fig06_hd209_h2o_importance.py` | 1 |
+| 7 | `fig07_hd209_h2o_metrics.py` | 1 |
 | 8 | `fig08_hatp26b_perturbations.py` | 2 |
 | 9 | `fig09_hatp26b_posteriors.py` | 2 |
 | 10 | `fig10_co2_core_correlation.py` | 3 (+2) |
@@ -129,12 +129,13 @@ reads experiment 2's simulated observation, and Figs 10, 12 and 13 read both.
 | 12 | `fig12_cnn_spectrum.py` | 3 (+2) |
 | 13 | `fig13_cnn_response_maps.py` | 3 (+2) |
 | C1 | `figC1_hd209_correlation_matrix.py` | 1 |
-| D1 | `figD1_hd209_importance_all.py` | 1 |
-| E1 | `figE1_hd209_fraction_fitted.py` | 1 |
-| G1 | `figG1_hatp26b_metrics.py` | 2 |
-| H1-H4 | `figH_hatp26b_full_posteriors.py` | 2 |
-| J1 | `figJ1_cnn_corner.py` | 3 |
-| K1 | `figK1_cnn_dropout_masks.py` | 3 |
+| D1 | `figD1_hd209_metrics.py` | 1 |
+| E1 | `figE1_hd209_importance_all.py` | 1 |
+| F1 | `figF1_hd209_fraction_fitted.py` | 1 |
+| H1 | `figH1_hatp26b_metrics.py` | 2 |
+| I1-I4 | `figI_hatp26b_full_posteriors.py` | 2 |
+| K1 | `figK1_cnn_corner.py` | 3 |
+| L1 | `figL1_cnn_dropout_masks.py` | 3 |
 
 ## Licensing
 

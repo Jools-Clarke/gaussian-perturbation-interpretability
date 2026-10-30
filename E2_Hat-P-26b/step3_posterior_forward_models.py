@@ -1,9 +1,9 @@
 """Experiment 2, step 3: the HAT-P-26 b forward models that need the baseline retrieval.
 
-1. Local metric (Eq. 15, Fig G1): forward models at 4 000 draws from the baseline posterior, resampled by weight so
+1. Local metric (Eq. 15, Fig H1): forward models at 4 000 draws from the baseline posterior, resampled by weight so
    that they are equally weighted, with all 13 parameters set.
        -> outputs/posterior_spectra.csv      one row per draw: the 13 parameters, then one column per bin
-2. Simulated observation (Secs 6 and 8.1): the forward model at the posterior means (Table F3), with the observed
+2. Simulated observation (Secs 6 and 8.1): the forward model at the posterior means (Table G3), with the observed
    sigma. It stands in for the real spectrum, whose instrumental and reduction artefacts no forward model contains,
    in Fig 3 and as the CNN's input.
        -> outputs/simulated_observation.csv  wl_um, depth, sigma

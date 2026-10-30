@@ -1,10 +1,10 @@
 """Experiment 2, step 5: the numbers the HAT-P-26 b figures plot (Sec. 7.3). Posterior statistics are weighted.
 
-    metrics.csv              Figs 8, G1, 13: global (Eq. 14, prior grid) and local (Eq. 15, posterior draws) metric
+    metrics.csv              Figs 8, H1, 13: global (Eq. 14, prior grid) and local (Eq. 15, posterior draws) metric
                              of the nine gases of the grid
     perturbed_spectra.csv    Fig 8 top: the +-3 sigma Gaussian perturbations of the observation at 4.04 and 4.29 um
     kernels.csv              Fig 8 middle: the two windows (Eq. 9), on a fine grid and on the bins (on_bin)
-    posterior_summary.csv    Table F3, Fig 10 (retrieved log CO2), Sec. 7.3.3 shifts: weighted median, p16, p84 and
+    posterior_summary.csv    Table G3, Fig 10 (retrieved log CO2), Sec. 7.3.3 shifts: weighted median, p16, p84 and
                              mean of every parameter of all nine retrievals
     co2_band_changes.csv     Fig 11: changes relative to TauREx's best fit to x*, in sigma of each bin: the +3 sigma
                              perturbation at 4.29 um, CO2 +-0.5 dex, H2O -0.5 dex, and TauREx's best fit to the
@@ -30,7 +30,7 @@ if __name__ == "__main__":
     out = {}
     wl, x, err = np.loadtxt(config.HATP26B_OBS).T
 
-    # Figs 8, G1, 13: step 3's posterior draws are already equally weighted, so the local metric needs no weights
+    # Figs 8, H1, 13: step 3's posterior draws are already equally weighted, so the local metric needs no weights
     grid, post = pd.read_csv(OUT / "grid_spectra.csv"), pd.read_csv(OUT / "posterior_spectra.csv")
     cols = wl_columns(grid)
     assert np.allclose(np.array(cols, float), wl)
@@ -50,7 +50,7 @@ if __name__ == "__main__":
         kernels[gas] = gaussian_window(kernels["wl_um"], wl[c], config.GAUSSIAN_FWHM_UM)
     out["perturbed_spectra"], out["kernels"] = perturbed, kernels
 
-    # Table F3, Fig 10, Sec. 7.3.3
+    # Table G3, Fig 10, Sec. 7.3.3
     runs = pd.read_csv(OUT / "runs.csv")
     out["posterior_summary"] = []
     for name in runs["name"]:

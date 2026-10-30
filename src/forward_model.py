@@ -1,7 +1,7 @@
 """TauREx-III forward models g (Sec. 2.5), built from the same .par file as the retrieval, so the two cannot drift apart.
 
 They give the prior grids of the global metric, the forward models at posterior samples of the local metric,
-the contributions (Sec. 7.2), the simulated observation (Sec. 6) and the CNN's training set (Appendix I2).
+the contributions (Sec. 7.2), the simulated observation (Sec. 6) and the CNN's training set (Appendix J2).
 """
 import numpy as np
 

@@ -21,7 +21,7 @@ N_WORKERS = 10
 HD209_PAR = _Path(__file__).resolve().parent / "DATA" / "HD209458b" / "HD209458b-Al-Rafaie-Taurex-benchmark.par"
 HD209_OBS = _Path(__file__).resolve().parent / "DATA" / "HD209458b" / "HD209458b-Tsarias-WFC3.dat"
 
-# Experiment 2: the same (Sec. 4.2, Tables F1, F2); experiment 3 reads HATP26B_OBS too
+# Experiment 2: the same (Sec. 4.2, Tables G1, G2); experiment 3 reads HATP26B_OBS too
 HATP26B_PAR = _Path(__file__).resolve().parent / "DATA" / "HAT-P-26b" / "hatp26b_taurex_transitspectroscopy.par"
 HATP26B_OBS = _Path(__file__).resolve().parent / "DATA" / "HAT-P-26b" / "HAT-P-26b_NIRSpec_G395H.dat"
 
@@ -31,7 +31,7 @@ GAUSSIAN_FWHM_UM = 0.1
 # The narrow HAT-P-26 b bands that experiments 2 and 3 target (Sec. 7.3): gas -> band centre (um)
 TARGET_BANDS = {"SO2": 4.041, "CO2": 4.293}
 
-# HAT-P-26 b posterior means (Table F3): the simulated observation (E2 step3, Secs 6 and 8.1) is the forward model at
+# HAT-P-26 b posterior means (Table G3): the simulated observation (E2 step3, Secs 6 and 8.1) is the forward model at
 # them, and T, Rp and the cloud top stay fixed at them in the CNN's training set (E3 step1)
 HATP26B_LOG_VMR = {
     "H2O": -1.63,
@@ -51,7 +51,7 @@ FIXED_PARAMS = {  # TauREx parameter names
     "clouds_pressure": 10**3.85,  # Pa
 }
 
-# The ten gases of the HAT-P-26 b retrieval (Table F2), in the CNN's output order (experiments 2 and 3)
+# The ten gases of the HAT-P-26 b retrieval (Table G2), in the CNN's output order (experiments 2 and 3)
 MOLECULES = ["H2O", "CO2", "SO2", "H2S", "CO", "CH4", "NH3", "HCN", "C2H2", "C2H4"]
 # Experiment 3: seed of the training draws, data split, validation noise, posterior noise and dropout masks
 SEED = 26

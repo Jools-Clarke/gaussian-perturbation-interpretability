@@ -1,7 +1,7 @@
-"""Experiment 3, step 1: the CNN's training set, 100 000 noiseless HAT-P-26 b forward models (Appendix I2).
+"""Experiment 3, step 1: the CNN's training set, 100 000 noiseless HAT-P-26 b forward models (Appendix J2).
 
-The ten log VMRs are drawn from the retrieval prior U(-12, -0.3) (Table F2), redrawing any draw whose gases sum past
-a VMR of 0.85 so that the H2/He fill stays positive. T, Rp and the cloud top are fixed at the Table F3 posterior
+The ten log VMRs are drawn from the retrieval prior U(-12, -0.3) (Table G2), redrawing any draw whose gases sum past
+a VMR of 0.85 so that the H2/He fill stays positive. T, Rp and the cloud top are fixed at the Table G3 posterior
 means, so the network needs no auxiliary inputs. Split 8:1:1 into train / validation / test.
     -> outputs/training_set.csv    one row per model: sample_id, split, log_<gas> x10, then one column per bin (um)
 
