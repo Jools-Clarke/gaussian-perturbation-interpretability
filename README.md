@@ -135,3 +135,7 @@ reads experiment 2's simulated observation, and Figs 10, 12 and 13 read both.
 | H1-H4 | `figH_hatp26b_full_posteriors.py` | 2 |
 | J1 | `figJ1_cnn_corner.py` | 3 |
 | K1 | `figK1_cnn_dropout_masks.py` | 3 |
+
+## Licensing
+
+Code is BSD-3-Clause; data in DATA/ retains its original licences (see the .bib files).
