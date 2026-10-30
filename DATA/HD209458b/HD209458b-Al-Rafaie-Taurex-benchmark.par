@@ -86,7 +86,7 @@ model_type = Transmission
 
     # We also retrieve the cloud-top pressure of a fully opaque cloud deck
     [[SimpleClouds]]
-    clouds_pressure = 1e+0                                 # no prior, given as 1e+1 bar to 1e-8 bar
+    clouds_pressure = 1e+3                                 # Pa; grid cloud top of Fig D1
 
     # we limit the collision-induced absorption to the couples H2H2 and H2-He 
     [[CIA]]
@@ -155,5 +155,5 @@ planet_radius:prior = "Uniform(bounds=(1.2, 1.5))"
 
 # cloud pressure fit in log mode
 clouds_pressure:fit = True                              # QA
-clouds_pressure:prior = "LogUniform(bounds=(6, 0))" #pa              #QA at 1 bar -8 bar
+clouds_pressure:prior = "LogUniform(bounds=(-3, 6))" #pa, Table B2
 
